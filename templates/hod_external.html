@@ -1,0 +1,369 @@
+
+  {% extends 'hod_base.html' %}
+  {% block title %}Home{% endblock title %}
+    {% block body %}
+   
+  
+  
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      var flashContainer = document.getElementById('flash-container');
+      var flashMessages = flashContainer.querySelectorAll('.flash-message');
+ 
+      var currentIndex = 0;
+ 
+      function showNextMessage() {
+          if (currentIndex < flashMessages.length) {
+              flashMessages[currentIndex].style.display = 'block';
+              setTimeout(hideCurrentMessage, 6000);  // Hide after 3 seconds
+          }
+      }
+ 
+      function hideCurrentMessage() {
+          flashMessages[currentIndex].style.display = 'none';
+          currentIndex++;
+          showNextMessage();
+      }
+ 
+      showNextMessage();
+  });
+ </script>
+
+
+    <main id="main" class="main">
+  
+      <div class="pagetitle">
+        <h1>Enter Details</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/hod_home">Home</a></li>
+            
+            <li class="breadcrumb-item active">Externals</li>
+          </ol>
+        </nav>
+      </div><!-- End Page Title -->
+      <section class="section">
+        <div class="row">
+          <div class="col-lg-6">
+  
+            <div class="card">
+              <div class="card-body">
+                <form action="/add_external" method='POST'>
+                <h5 class="card-title">Subjects</h5>
+  
+                <!-- Horizontal Form -->
+                <form>
+                  <div class="row mb-3">
+                    
+                    <div class="col-md-4">
+                      <div class="form-floating mb-3">
+                        <select class="form-select"  name="department"   id="floatingSelect" aria-label="State"  required>
+                          <option></option>
+                          {% for d in d %}
+                          {% if d.d_id != d_id %}
+                          <option value={{d.d_id}} >{{d.dname}}</option>
+                          {% endif %}
+                          
+                          {% endfor %}</select>
+                        
+                            <label for="floatingSelect">Department</label>
+                          </div>
+                        </div>
+
+
+                        <div class="col-md-4">
+                          <div class="form-floating mb-3">
+                            <select class="form-select" id="floatingSelect" aria-label="State" id="teacher" name="teacher"  required>
+                                            </select>
+                                <label for="floatingSelect">Teacher</label>
+                              </div>
+                            </div>
+
+
+
+
+
+                <!-- Add a JavaScript function to handle department change -->
+                <script>
+                  // Use querySelector() for more flexibility and maintainability
+                  const departmentSelect = document.querySelector('select[name="department"]');
+                  const teacherSelect = document.querySelector('select[name="teacher"]');
+                
+                  // Efficient event binding using addEventListener()
+                  departmentSelect.addEventListener('change', updateTeachers);
+                
+                  function updateTeachers() {
+                    const departmentId = departmentSelect.value;
+                
+                    // Implement your preferred fetching method (e.g., fetch, Axios, jQuery.ajax)
+                    fetch('/get_teachers/' + departmentId)
+                      .then(response => response.json())
+                      .then(data => {
+                        teacherSelect.innerHTML = ''; // Clear existing options
+                
+                        data.forEach(teacher => {
+                          const option = document.createElement('option');
+                          option.value = teacher.teacher_id;
+                          option.text = teacher.teacher_name;
+                          teacherSelect.appendChild(option);
+                        });
+                      })
+                      .catch(error => {
+                        console.error('Error fetching teachers:', error);
+                        // Handle errors gracefully, e.g., display an error message to the user
+                      });
+                  }
+                </script>
+                
+                
+                
+                
+                
+                
+
+
+
+
+
+
+
+
+
+
+                            <div class="col-md-4">
+                              <div class="form-floating mb-3">
+                                <select class="form-select" id="floatingSelect" aria-label="State" name="cname"   id="cname" required>
+                                  <option></option>
+                                  {% for classes in allclass %}
+                                  <option value={{classes.cid}} >{{classes.cname}}</option>
+                                  {% endfor %}                
+                                </select>
+                                    <label for="floatingSelect">Class</label>
+                                  </div>
+                                </div>
+
+
+
+                                <div class="col-md-4">
+                                  <div class="form-floating mb-3">
+                                    <select class="form-select" id="floatingSelect" aria-label="State"name="subject"   id="subject" required>
+                                     <option></option>
+                                      {% for subjects in allsub %}
+           
+                                      <option value={{subjects.sid}}>{{subjects.sname}}</option>
+                                    
+                                      {% endfor %}
+
+                                    </select>
+                                        <label for="floatingSelect">Subject</label>
+                                      </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-4">
+                                      <div class="form-floating mb-3">
+                                        <select class="form-select" id="floatingSelect" aria-label="State" name="day" id="day" required>
+                                          <option value=""></option>
+                                          <option value="mon">Monday</option>
+                                          <option value="tues">Tuesday</option>
+                                          <option value="wed">Wednesday</option>
+                                          <option value="thurs">Thursday</option>
+                                          <option value="fri">Friday</option>        
+                                        </select>
+                                            <label for="floatingSelect">Day</label>
+                                          </div>
+                                        </div>
+
+
+                                        <div class="col-md-4">
+                                          <div class="form-floating mb-3">
+                                            <select class="form-select" id="floatingSelect" aria-label="State" name="period" id="period"  required>
+                                              <option value=""></option>
+                                              <option value="1">1</option>
+                                              <option value="2">2</option>
+                                              <option value="3">3</option>
+                                              <option value="4">4</option>
+                                              <option value="5">5</option>             
+                                            </select>
+                                                <label for="floatingSelect">Period</label>
+                                              </div>
+                                            </div>
+
+
+
+
+
+                    </div>
+                 
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                   
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div id="flash-container">
+                            {% for category, message in messages %}
+                            {% if category == 'Error' %}
+                              
+                            
+                                <div class="flash-message" id="{{ success }}" style="color: red;" >
+                                    <strong>{{ category }}:</strong> {{ message }}
+                                </div>
+                                {% endif %}
+                
+                                {% if category == 'success' %}
+                              
+                            
+                                <div class="flash-message" id="{{ success }}" style="color: green;" >
+                                    <strong>{{ category }}:</strong> {{ message }}
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+  
+                  </form>
+                  </div>
+                </form><!-- End Horizontal Form -->
+  
+              </div>
+            </div>
+  
+  
+                 
+  
+
+<!-- Add a JavaScript function to handle department change -->
+
+
+
+
+
+
+                  
+{% if allex |length == 0 %} 
+<div class="alert alert-dark" role="alert">  
+ Not Entered.
+</div>
+{% else %}
+
+
+<table class="table table-hover"><h2>Teachers Assigned</h2>
+<thead>
+<tr>
+<th scope="col">sno</th>           
+<th scope="col">Teachers</th>
+<th scope="col">Classes</th>
+<th scope="col">Subjects</th>
+<th scope="col">Day</th>
+<th scope="col">Period</th>
+<th scope="col">Action</th>
+
+</tr>
+</thead>
+<tbody>
+{% for tn in allex %}
+<tr>
+<td>{{loop.index}}</td>
+<td>
+{% for t in allTeachers %}
+
+
+{% if tn.teacher_id==t.teacher_id %}
+{{t.name}}
+{% endif %}
+
+{% endfor %}
+
+
+</td>
+<td>
+{% for c in allclass %}
+
+
+{% if tn.cid==c.cid %}
+{{c.cname}}
+{% endif %}
+
+{% endfor %}
+
+</td>
+<td>
+{% for s in allsub %}
+
+
+{% if tn.sid==s.sid %}
+{{s.sname}}
+{% endif %}
+
+{% endfor %}
+
+
+</td>
+<td>{{tn.day}}</td>
+<td>{{tn.period}}</td>
+<td>
+<a href="/delete_external/{{tn.exid}}" <button type="button" class="btn btn-outline-secondary btn-sm mx 3">Delete</button>
+</td>
+
+
+</tr> 
+
+
+
+
+
+{% endfor %}
+
+
+
+
+
+
+
+
+
+{% endif %}
+   
+      
+     </tbody>
+   </table>
+
+
+   
+  
+  
+                  
+  
+                </div><!-- End Bordered Tabs -->
+  
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </section>
+  
+    </main><!-- End #main -->
+  
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Autoplanify</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+       
+      </div>
+    </footer><!-- End Footer -->
+  
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    
+   
+    {% endblock body %}

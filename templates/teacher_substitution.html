@@ -1,0 +1,321 @@
+{% extends 'teacher_base.html' %}
+{% block title %}Home{% endblock title %}
+  {% block body %}
+ 
+
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Enter Substitution</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/teacher_home">Home</a></li>
+          
+          <li class="breadcrumb-item active">Substitution</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <form action="/teacher_add_substitution" method='POST' onsubmit="return validateRadioGroup()">
+              <h5 class="card-title">Substitution</h5>
+              <p>
+                In order to ensure a seamless and organized substitution process, it is imperative to undertake all teacher substitutions for a given day only after compiling a comprehensive list of all absent teachers
+                </p>
+                
+              <!-- Horizontal Form -->
+              <form>
+                <div class="col-md-4">
+                  <div class="form-floating mb-3">
+                    <select class="form-select"  name="teacher"   id="teacher"    id="floatingSelect" aria-label="State"  required>
+                      <option></option>
+                      {% for d in teachers_name %}
+                      <option value={{d}} >
+                          {% for t in allTeachers  %}
+                            {% if d==t.teacher_id %}
+                            {{t.name}}
+                            {% endif %}  
+                          {% endfor %}
+                          </option>
+                      {% endfor %}</select>
+                        <label for="floatingSelect">Teacher</label>
+                      </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                                    
+                      <div class="form-floating">
+                        <input  type="date" id="date" name="date" class="form-control" id="floatingEmail"  placeholder="Absent Date" required>
+                        <label for="floatingEmail" style="color: gray;">Absent Date</label>
+                      </div>
+                    </div>
+
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                 
+                  {% with messages = get_flashed_messages(with_categories=true) %}
+                  {% if messages %}
+                      <div id="flash-container">
+                          {% for category, message in messages %}
+                          {% if category == 'Error' %}
+                            
+                          
+                              <div class="flash-message" id="{{ success }}" style="color: red;" >
+                                  <strong>{{ category }}:</strong> {{ message }}
+                              </div>
+                              {% endif %}
+              
+                              {% if category == 'success' %}
+                            
+                          
+                              <div class="flash-message" id="{{ success }}" style="color: green;" >
+                                  <strong>{{ category }}:</strong> {{ message }}
+                              </div>
+                              {% endif %}
+                          {% endfor %}
+                      </div>
+                  {% endif %}
+              {% endwith %}
+              
+                  
+
+                </form>
+                </div>
+              </form><!-- End Horizontal Form -->
+
+              <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var flashContainer = document.getElementById('flash-container');
+                    var flashMessages = flashContainer.querySelectorAll('.flash-message');
+          
+                    var currentIndex = 0;
+          
+                    function showNextMessage() {
+                        if (currentIndex < flashMessages.length) {
+                            flashMessages[currentIndex].style.display = 'block';
+                            setTimeout(hideCurrentMessage, 6000);  // Hide after 3 seconds
+                        }
+                    }
+          
+                    function hideCurrentMessage() {
+                        flashMessages[currentIndex].style.display = 'none';
+                        currentIndex++;
+                        showNextMessage();
+                    }
+          
+                    showNextMessage();
+                });
+            </script>
+
+            </div>
+          </div>
+
+
+               
+
+         
+          <div class="container my-3"></div>
+            
+            
+          {% if  absent_teacher |length == 0 %} 
+                   <div class="alert alert-dark" role="alert">  
+                    No Absent teacher assigned
+                   </div>
+        `{% else %}
+      
+      
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Absent Teacher</th>
+                        <th scope="col">Date</th>  
+                        <th scope="col">Action</th>  
+                      </tr>
+                    </thead>
+                    <tbody>
+                      
+                {% for a in  absent_teacher %}
+                  <tr>
+          
+                    {% for t in  allTeachers %}
+                      {% if a.teacher_id==t.teacher_id %}
+                      <td>{{t.name}}</td>
+                      {% endif %}
+                      {% endfor %}
+          
+                    <td>{{a.date}}</td>
+                    
+          
+                    
+                    <td>
+                    <a href="/teacher_delete_absent_t/{{a.atid}}" <button type="button" class="btn btn-outline-secondary btn-sm mx 3">Delete</button>
+                    </td>
+                    </tr>
+          
+          
+          
+                  
+                  {% endfor %}
+                 
+                </tbody>
+              </table>
+      <br>
+              <div style="align-content:center; text-align: center;">
+                <a    href="/teacher_substitution_generate" <button type="button" class="btn btn-outline-secondary btn-sm mx 3"><h4>substitute</h4></button></a>
+                   </div> <br>
+          
+      
+                   {% endif %}
+              
+              {% if  substitute |length == 0 %} 
+                   <div class="alert alert-dark" role="alert">  
+                    No Substitutions
+                   </div>
+                  {% else %}
+                  
+                  
+      
+                <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Date</th>  
+                    <th scope="col">Period</th>           
+                    <th scope="col">Leave Teacher</th>
+                    <th scope="col">class</th>
+                    <th scope="col">Substitution </th>
+                    <th scope="col">Action</th>  
+                  </tr>
+                </thead>
+                <tbody>
+                  {% endif %}
+                 
+            {% for s in  substitute %}
+            
+              <tr>
+                <td>{{s.date}}</td>
+                <td>{{s.period}}</td>
+                
+      
+                {% for t in  allTeachers %}
+                  {% if s.original_teacher_id==t.teacher_id %}
+                  <td>{{t.name}}</td>
+                  {% endif %}
+                {% endfor %}
+      
+                
+                {% for c in  allclass %}
+                  {% if c.cid==s.cid %}
+                  <td>{{c.cname}}</td>
+                  {% endif %}
+                {% endfor %}
+      
+                {% if s.teacher_id==-1 %}
+                 <td> Library</td>
+                {% endif %}
+                {% if s.teacher_id==0 %}
+                 <td> Lab</td>
+                {% endif %}
+                {% for t in  allTeachers %}
+                  {% if s.teacher_id==t.teacher_id %}
+                  <td>{{t.name}}</td>
+                  {% endif %}
+                {% endfor %}
+                <td>
+                <a href="/teacher_delete_substitute/{{s.subid}}" <button type="button" class="btn btn-outline-secondary btn-sm mx 3">Delete</button>
+                </td>
+                </tr>
+                
+      
+      
+              
+              {% endfor %}
+              
+            </tbody>
+            
+          </table>
+
+
+ {% if  substi |length == 0 %} 
+                  
+ {% else %}
+<center>
+<div style="border: 1px solid blue;">
+ <br><h5><b>Detete Substitution DateWise</b><h5>
+ {% for s in substi  %}
+ <br> <br>
+ <a href="/teacher_delete_date_substitute/{{s}}" <button type="button" class="btn btn-primary"> {{s}}</button></a>
+
+ {% endfor %}
+ <br><br>
+   </div> 
+
+
+
+
+
+   
+ 
+{% endif %}
+
+
+
+
+<br><br>
+
+{% if  substi |length == 0 %} 
+                  
+  {% else %}
+<center>
+ <div style="border: 1px solid blue;">
+  <br><h5> <b>Send Teacher Substitute Notification for Designated Dates</b><h5>
+  {% for s in substi  %}
+  <br> <br>
+  <a href="/teacher_substitution_message/{{s}}" <button type="button" class="btn btn-primary">{{s}}</button></a>
+ 
+  {% endfor %}
+  <br><br>
+    </div> 
+
+
+    {% endif %}
+</div>
+
+
+
+                
+
+              </div><!-- End Bordered Tabs -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>Autoplanify</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+     
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  
+ 
+  {% endblock body %}
+                                      

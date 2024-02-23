@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock title %}
+  {% block body %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TimetableGen - Guidelines</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+
+        header {
+            background-color: #752E13;
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin: 20px;
+        }
+
+        .hero h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: rgb(177, 46, 19);
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            color: #555;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            text-decoration: none;
+            color: #fff;
+            background-color: #28a745;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #218838;
+        }
+
+        .features {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .feature {
+            margin-bottom: 40px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fff;
+            transition: transform 0.3s;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature img {
+            max-width: 80px;
+            height: auto;
+        }
+
+        .guide {
+            text-align: left;
+            padding: 40px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin: 20px;
+        }
+
+        .guide h2 {
+            color: rgb(177, 46, 19);
+        }
+
+        .guide ol {
+            margin-bottom: 20px;
+        }
+
+        .guide li {
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>TimetableGen</h1>
+    <p>Your Smart Timetable Solution</p>
+</header>
+
+<section class="hero">
+    <h1>Welcome to TimetableGen</h1>
+    <p>Create and manage your school's timetable with ease and precision.</p>
+    <a href="#generate-timetable" class="btn btn-outline-danger cta-button">Get Started</a>
+</section>
+
+<section class="features">
+    <div class="feature">
+        <img src="path-to-your-icons/icons8-calendar.gif" alt="Schedule Icon">
+        <h2>Add classes</h2>
+        <p>Start by adding all the classes in the system.</p>
+    </div>
+
+    <div class="feature">
+        <img src="path-to-your-icons/icons8-settings.gif" alt="Calendar">
+        <h2>Add Subjects</h2>
+        <p>Next, add all the subjects that need to be scheduled.</p>
+    </div>
+
+    <div class="feature">
+        <img src="path-to-your-icons/icons8-download.gif" alt="Settings Icon">
+        <h2>Add External Teachers</h2>
+        <p>If there are external or other department teachers involved, assign them to the respective subjects and classes.</p>
+    </div>
+
+    <div class="feature">
+        <img src="path-to-your-icons/icons8-edit.gif" alt="Settings Icon">
+        <h2>Allot Lab class Information</h2>
+        <p>For classes with labs, assign the lab sessions including the subject and the number of periods to the respective teacher.</p>
+        
+    </div>
+    <div class="feature">
+        <img src="path-to-your-icons/icons8-edit.gif" alt="Settings Icon">
+        <h2>Generate lab Timetable</h2>
+        <p>Generate the lab timetable automatically based on the assignments.</p>
+        
+    </div>
+    <div class="feature">
+        <img src="path-to-your-icons/icons8-edit.gif" alt="Settings Icon">
+        <h2>Allot Theory class Information </h2>
+        <p>Assign theory classes and subjects along with the number of periods to the respective teachers.</p>
+        
+    </div>
+    <div class="feature">
+        <img src="path-to-your-icons/icons8-edit.gif" alt="Settings Icon">
+        <h2>Generate TimeTable</h2>
+        <p>Generate the overall timetable automatically.</p>
+        
+    </div>
+    <div class="feature">
+        <img src="path-to-your-icons/icons8-edit.gif" alt="Settings Icon">
+        <h2>View TimeTable in Dynamic</h2>
+        <p>View the timetable for each teacher and class individually or as a whole.</p>
+        
+    </div>
+    <div class="feature">
+        <img src="path-to-your-icons/icons8-edit.gif" alt="Settings Icon">
+        <h2>Download the Timetable</h2>
+        <p>Download the generated timetable for future reference.</p>
+        
+    </div>
+    <div class="feature">
+        <img src="path-to-your-icons/icons8-edit.gif" alt="Settings Icon">
+        <h2>Delete Option</h2>
+        <p>If you are not satisfied with the timetable, you can delete it and press the "Generate" button again.</p>
+        
+    </div>
+
+
+
+</section>
+<footer>
+    <p>&copy; 2023 TimetableGen</p>
+</footer>
+
+{% endblock body %}

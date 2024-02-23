@@ -1,0 +1,551 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>AutoPlanify</title>
+  <link rel="icon"  href="{{ url_for('static', filename='img/a.PNG') }}">
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  
+  <link href="  {{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/quill/quill.snow.css') }}">
+  <link href="{{ url_for('static', filename='vendor/quill/quill.bubble.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/remixicon/remixicon.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/simple-datatables/style1.css') }}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{{ url_for('static', filename='css/style1.css') }}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Updated: Jan 29 2024 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="/teacher_home" class="logo d-flex align-items-center">
+        <h1 class="m-0"><i class="fa fa-user-tie me-2"></i>A</h1>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle " href="#">
+            <i class="bi bi-search"></i>
+          </a>
+        </li><!-- End Search Icon-->
+
+        
+        
+
+        <li class="nav-item dropdown pe-3">
+
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-person" class="rounded-circle"></i>
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{name}}</span>
+          </a><!-- End Profile Iamge Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6>{{name}}</h6>
+              <span>Teacher</span>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="/teacher_profile">
+                <i class="bi bi-person"></i>
+                <span>My Profile</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="/dropsession">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+              </a>
+            </li>
+
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
+
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/teacher_profile">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+    
+
+      
+      <li class="nav-heading">View Timetable</li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/teacher_lab_show">
+          <i class="bi bi-person"></i>
+          <span>lab Timetable</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+     
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/teacher_show">
+          <i class="bi bi-person"></i>
+          <span>Timetable</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+
+      <li class="nav-heading">Enter Substitution</li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/teacher_add_substitution">
+          <i class="bi bi-person"></i>
+          <span>Substitution</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+
+    </ul>
+
+  </aside><!-- End Sidebar-->
+
+
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>View TimeTable</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/teacher_home">Home</a></li>
+          
+          <li class="breadcrumb-item active">Lab </li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+                  <h5 class="card-title">Lab TimeTable</h5>
+                 
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div id="flash-container">
+                {% for category, message in messages %}
+                {% if category == 'error' %}
+                  
+                
+                    <div class="alert alert-btn-outline-light" id="{{ error }}" style="color: red;" >
+                        <strong>{{ category }}:</strong> {{ message }}
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    
+    
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div id="flash-container">
+                {% for category, message in messages %}
+                {% if category == 'success' %}
+                  
+                
+                    <div class="alert alert-btn-outline-light" id="{{ success }}" style="color: rgb(29, 128, 7);" >
+                        <strong>{{ category }}:</strong> {{ message }}
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+        
+        {% if alltt |length == 0 %} 
+             <div class="alert alert-btn-outline-light" role="alert">  
+              No timetable FOUND.
+             </div>
+            {% else %}
+                  <!-- Active Table -->
+                  <table class="table" id="myTable">
+                    <thead>
+                     
+                      <tr>
+                        <th scope="col">Days</th>           
+                        <th scope="col">Period 1</th>
+                        <th scope="col">Period 2</th>
+                        <th scope="col">Period 3</th>
+                        <th scope="col">Period 4</th>
+                        <th scope="col">Period 5</th>
+                       
+                      </tr>
+                    </thead>
+                    <tbody>
+                     
+          
+                    
+                      {% for t in days %}
+                      <tr >
+                        <td scope="row"><b>{{t}}</b></td>
+                        <td>
+                        
+                          {% for tt in alltt  %}
+                              {% if tt.day==t  %}
+                            {% if tt.period==1 %}
+                            {% for t in allTeachers %}
+                              {% if t.teacher_id==tt.teacher_id %}
+                              <b>{{t.name}}</b>
+                                                  {% endif %}
+                            {% endfor %}
+                            <br>
+          
+                            {% for c in allclass %}
+                              {% if c.cid==tt.cid %}
+                              {{c.cname}}
+                              {% endif %}
+                            {% endfor %}
+                            
+                            <br>
+                            {% for s in allsub %}
+                              {% if s.sid==tt.sid %}
+                              {{s.sname}}
+                              {% endif %}
+                            {% endfor %}
+                            
+                            
+                           
+                            {% endif %}
+                             {% endif %}
+                        {% endfor %}
+                        
+                        </td>
+                        
+                        <td>
+          
+                          {% for tt in alltt  %}
+                              {% if tt.day==t  %}
+                            {% if tt.period==2 %}
+                            {% for t in allTeachers %}
+                              {% if t.teacher_id==tt.teacher_id %}
+                              <b>{{t.name}}</b>
+                              {% endif %}
+                            {% endfor %}
+                            <br>
+          
+                            {% for c in allclass %}
+                              {% if c.cid==tt.cid %}
+                              {{c.cname}}
+                              {% endif %}
+                            {% endfor %}
+                            
+                            <br>
+                            {% for s in allsub %}
+                              {% if s.sid==tt.sid %}
+                              {{s.sname}}
+                              {% endif %}
+                            {% endfor %}
+                            
+          
+                            {% endif %}
+                             {% endif %}
+                        {% endfor %}
+          
+                        </td>
+          
+                    <td>
+          
+                      {% for tt in alltt  %}
+                              {% if tt.day==t  %}
+                            {% if tt.period==3 %}
+                            {% for t in allTeachers %}
+                              {% if t.teacher_id==tt.teacher_id %}
+                              <b>{{t.name}}</b>
+                              {% endif %}
+                            {% endfor %}
+                            <br>
+          
+                            {% for c in allclass %}
+                              {% if c.cid==tt.cid %}
+                              {{c.cname}}
+                              {% endif %}
+                            {% endfor %}
+                            
+                            <br>
+                            {% for s in allsub %}
+                              {% if s.sid==tt.sid %}
+                              {{s.sname}}
+                              {% endif %}
+                            {% endfor %}
+                            
+          
+          
+                            {% endif %}
+                             {% endif %}
+                        {% endfor %}
+          
+                    </td>
+          
+                <td>
+          
+                  {% for tt in alltt  %}
+                  {% if tt.day==t  %}
+                {% if tt.period==4 %}
+                {% for t in allTeachers %}
+                              {% if t.teacher_id==tt.teacher_id %}
+                              <b>{{t.name}}</b>
+                              {% endif %}
+                            {% endfor %}
+               <br>
+          
+               {% for c in allclass %}
+               {% if c.cid==tt.cid %}
+               {{c.cname}}
+               {% endif %}
+             {% endfor %}
+             
+             <br>
+             {% for s in allsub %}
+               {% if s.sid==tt.sid %}
+               {{s.sname}}
+               {% endif %}
+             {% endfor %}
+             
+          
+                {% endif %}
+                 {% endif %}
+            {% endfor %}
+          
+                </td>
+          
+            <td>
+          
+              {% for tt in alltt  %}
+              {% if tt.day==t  %}
+            {% if tt.period==5 %}
+            {% for t in allTeachers %}
+                              {% if t.teacher_id==tt.teacher_id %}
+                              <b>{{t.name}}</b>
+                              {% endif %}
+                            {% endfor %}
+            <br>
+          
+            {% for c in allclass %}
+            {% if c.cid==tt.cid %}
+            {{c.cname}}
+            {% endif %}
+          {% endfor %}
+          
+          <br>
+          {% for s in allsub %}
+            {% if s.sid==tt.sid %}
+            {{s.sname}}
+            {% endif %}
+          {% endfor %}
+          
+          
+            {% endif %}
+             {% endif %}
+          {% endfor %}
+          
+            </td>
+                        
+                        {% endfor %} 
+
+
+                    </thead>
+                    <tbody>
+                      
+                    </tbody>
+                  </table>
+                  <!-- End Active Table --><!-- End Horizontal Form -->
+
+                  
+
+                  <center>
+                  <a href="/lab_show" <button  onclick="downloadTable()" class="btn btn-primary">Download TimeTable</button></a>
+                  
+          
+          
+          
+
+
+
+
+
+    
+  <br><br>
+ 
+
+
+
+
+  
+  <script >
+    function downloadTable() {
+  const table = document.getElementById('myTable');
+  const rows = table.rows;
+  const headers = Array.from(rows[0].querySelectorAll('th')).map(th => th.innerText);
+  const data = [];
+
+  for (let i = 1; i < rows.length; i++) {
+    const rowData = Array.from(rows[i].querySelectorAll('td')).map(td => td.innerText);
+    data.push(rowData);
+  }
+
+  const formattedData = [headers, ...data];
+  const csvContent = convertToCSV(formattedData);
+  downloadFile(csvContent, 'lab timetable.csv');
+}
+
+function convertToCSV(data) {
+  const csvRows = [];
+  for (const row of data) {
+    const csvRow = row.map(value => `"${value}"`).join(',');
+    csvRows.push(csvRow);
+  }
+  return csvRows.join('\n');
+}
+
+function downloadFile(content, filename) {
+  const element = document.createElement('a');
+  element.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(content));
+  element.setAttribute('download', filename);
+  element.style.display = 'none';
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
+  var a=alert("Lab TimeTable Downloaded")
+}
+
+  </script>
+
+
+
+
+
+
+  <div  style="border: 1px blue solid; text-align: center; width:fit-content;height:fit-content; ">
+    <h5> View Lab TimeTable for classes</h5>
+    {% for c in class_name %}
+    {% for cn in allclass %}
+      {% if c==cn.cid %}
+      <a href="/teacher_class_timetable/{{c}}"<button type="button" class="btn btn-primary" >{{cn.cname}}</button></a>
+
+      {% endif %}
+    {% endfor %}
+    {% endfor %}
+  </div>
+<br>
+
+        
+        {% endif %}  
+
+            </div>
+          </div>
+
+
+               
+
+          
+</div>
+
+
+
+                
+
+              </div><!-- End Bordered Tabs -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>Autoplanify</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+     
+    </div>
+  </footer><!-- End Footer -->
+
+  
+
+  
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  
+<!-- Vendor JS Files -->
+<script src="{{ url_for('static', filename='vendor/apexcharts/apexcharts.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/chart.js/chart.umd.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/echarts/echarts.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/quill/quill.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/simple-datatables/simple-datatables.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/tinymce/tinymce.min.js') }}"></script>
+<script src="  {{ url_for('static', filename='vendor/php-email-form/validate.js') }}"></script>
+
+<!-- Template Main JS File -->
+<script src=" {{ url_for('static', filename='js/main1.js') }}"></script>
+</body>
+</html>
+ 
+                                      

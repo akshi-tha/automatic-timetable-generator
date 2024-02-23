@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title> AutoPlanify</title>
+    <link rel="icon"  href="{{ url_for('static', filename='img/a.PNG') }}">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <!-- Favicon -->
+    <link href="{{ url_for('static', filename='img/favicon.ico') }}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{{ url_for('static', filename='lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='lib/animate/animate.min.css') }}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+
+<body>
+   
+    <!-- Spinner End -->
+
+
+    <link rel="icon" href= 
+"https://media.geeksforgeeks.org/wp-content/cdn-uploads/gfg_200X200.png" 
+          type="image/x-icon"> 
+    <link href="{{ url_for('static', filename='img/a,png') }}" type="image/x-icon" rel="icon">
+
+    <!-- Navbar & Carousel Start -->
+    <div class="container-fluid position-relative p-0">
+        <nav class="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
+            <a href="/" class="navbar-brand p-0">
+                <h1 class="m-0"><i class="fa fa-user-tie me-2"></i>AutoPlanify</h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="/" class="nav-item nav-link">Home</a>
+                   
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Sign In / Sign Up</a>
+                        <div class="dropdown-menu m-0">
+                           
+                            <a href="/admin_register" class="dropdown-item">Admin Register</a>
+             
+              
+                           <a href="/admin_login" class="dropdown-item">Admin login</a>
+                          <a href="/hod_login" class="dropdown-item">HOD Login</a>
+                           <a href="/teacher_login" class="dropdown-item">Teacher Login</a>
+                        </div>
+                    </div>
+                    <a href="#" class="nav-item nav-link">Profile</a>
+                   
+                    </div>
+                    
+                
+        </nav>
+
+
+
+  <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="w-100" src="{{ url_for('static', filename='img/carousel-1.jpg') }}" alt="Image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3" style="max-width: 900px;">
+                            <h5 class="text-white text-uppercase mb-3 animated slideInDown">College Timetable Made Easy</h5>
+                            <h1 class="display-1 text-white mb-md-4 animated zoomIn"> Generate Your Perfect Schedule in Minutes</h1>
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="w-100" src="{{ url_for('static', filename='img/carousel-1.jpg') }}" alt="Image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3" style="max-width: 900px;">
+                            <h5 class="text-white text-uppercase mb-3 animated slideInDown"> College Timetable Made Easy</h5>
+                            <h1 class="display-1 text-white mb-md-4 animated zoomIn"></h1> Generate Your Perfect Schedule in Minutes</h1>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#header-carousel"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <!-- Navbar & Carousel End -->
+
+
+    <!-- Full Screen Search Start -->
+    <div class="modal fade" id="searchModal" tabindex="-1">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content" style="background: rgba(9, 30, 62, .7);">
+                <div class="modal-header border-0">
+                    <button type="button" class="btn bg-white btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex align-items-center justify-content-center">
+                    <div class="input-group" style="max-width: 600px;">
+                        <input type="text" class="form-control bg-transparent border-primary p-3" placeholder="Type search keyword">
+                        <button class="btn btn-primary px-4"><i class="bi bi-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Full Screen Search End -->
+
+
+    <!-- Facts Start -->
+   
+
+    <!-- About Start -->
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-7">
+                    <div class="section-title position-relative pb-3 mb-5">
+                        <h5 class="fw-bold text-primary text-uppercase">About Us</h5>
+                        <h1 class="mb-0">AutoPlanify: Making College Scheduling Painless and Efficient</h1>
+                    </div>
+                    <p class="mb-4">AutoPlanify is a revolutionary, automatic college timetable generator designed to streamline the scheduling process for Heads of Departments (HODs) and teachers. We understand the time-consuming and complex task of manually creating timetables, often riddled with conflicts and balancing challenges. AutoPlanify empowers HODs to take control and generate optimized, conflict-free, and efficient timetables in minutes.</p>
+                    <div class="row g-0 mb-3">
+                        <div class="col-sm-6 wow zoomIn" data-wow-delay="0.2s">
+                            <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>Goodbye Spreadsheet Hell</h5>
+                            <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>Time-Saving Wizard</h5>
+                        </div>
+                        <div class="col-sm-6 wow zoomIn" data-wow-delay="0.4s">
+                            <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>Faculty Friend</h5>
+                            <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>Stress-Free Semester Starts</h5>
+                        </div>
+                    </div>
+                    
+                       
+                    
+                </div>
+                <div class="col-lg-5" style="min-height: 500px;">
+                    <div class="position-relative h-100">
+                        <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.9s" src="{{ url_for('static', filename='img/about.JPEG') }}" style="object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+
+
+    <!-- Features Start -->
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px;">
+                <h5 class="fw-bold text-primary text-uppercase">Why Choose Us</h5>
+                <h1 class="mb-0">Break free from manual scheduling shackles</h1>
+            </div>
+            <div class="row g-5">
+                <div class="col-lg-4">
+                    <div class="row g-5">
+                        <div class="col-12 wow zoomIn" data-wow-delay="0.2s">
+                            <div class="bg-primary rounded d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="fa fa-cubes text-white"></i>
+                            </div>
+                            <h4>Effortless Timetable Creation</h4>
+                            <p class="mb-0"> Ditch time-consuming manual work and generate conflict-free, optimized timetables in minutes </p>
+                        </div>
+                        <div class="col-12 wow zoomIn" data-wow-delay="0.6s">
+                            <div class="bg-primary rounded d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="fa fa-award text-white"></i>
+                            </div>
+                            <h4>User-Friendly Interface</h4>
+                            <p class="mb-0">avigate through our intuitive platform with ease, making timetable management a breeze.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4  wow zoomIn" data-wow-delay="0.9s" style="min-height: 350px;">
+                    <div class="position-relative h-100">
+                        <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.1s" src="{{ url_for('static', filename='img/feature.JPEG') }}" style="object-fit: cover;">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="row g-5">
+                        <div class="col-12 wow zoomIn" data-wow-delay="0.4s">
+                            <div class="bg-primary rounded d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="fa fa-users-cog text-white"></i>
+                            </div>
+                            <h4>Reliable Substitution</h4>
+                            <p class="mb-0"> AutoPlanify not only generates timetables but also offers substitution suggestions for a seamless academic experience.</p>
+                        </div>
+                        <div class="col-12 wow zoomIn" data-wow-delay="0.8s">
+                            <div class="bg-primary rounded d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="fa fa-phone-alt text-white"></i>
+                            </div>
+                            <h4>Real-time Updates</h4>
+                            <p class="mb-0">Stay informed with real-time substitution alerts, ensuring a smooth flow even in unexpected situations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Features Start -->
+
+
+    <!-- Service Start -->
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px;">
+                <h5 class="fw-bold text-primary text-uppercase">Our Services</h5>
+                <h1 class="mb-0"><b>Schedule with Confidence: AutoPlanify</b> - Your Reliable Scheduling Partner</h2>
+            </div>
+            <div class="row g-5">
+                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.3s">
+                    <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
+                        <div class="service-icon">
+                            <i class="fa fa-table text-white"></i>
+                        </div>
+                        <h4 class="mb-3">Automated Timetable Generation</h4>
+                        <p class="m-0">Utilize our cutting-edge algorithm to effortlessly generate accurate and optimized timetables tailored to your college's specific needs.</p>
+                       
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.6s">
+                    <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
+                        <div class="service-icon">
+                            <i class="fa fa-thumbs-up"  style="color: aliceblue;"></i>
+                        </div>
+                        <h4 class="mb-3">Teacher Substitution Management</h4>
+                        <p class="m-0">Seamlessly handle teacher substitutions to ensure classes run smoothly even in unexpected circumstances.</p>
+                        
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.9s">
+                    <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
+                        <div class="service-icon">
+                            <i class="fa fa-download text-white"></i>
+                        </div>
+                        <h4 class="mb-3">Downloadable Timetables</h4>
+                        <p class="m-0">Enable easy access for teachers, students, and administrative staff by providing downloadable timetables .</p>
+                        
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.3s">
+                    <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
+                        <div class="service-icon">
+                            <i class="fa fa-user text-white"></i>
+                        </div>
+                        <h4 class="mb-3">Inter-Department Teacher Assignment</h4>
+                        <p class="m-0">Optimize faculty resources by intelligently assigning teachers across departments, promoting collaboration and resource efficiency.</p>
+                        
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.6s">
+                    <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
+                        <div class="service-icon">
+                            
+                            <i class="fa fa-file text-white"></i>
+                        </div>
+                        <h4 class="mb-3">Real-time Updates</h4>
+                        <p class="m-0">Receive instant notifications and updates on any changes, ensuring everyone stays informed and well-prepared.</p>
+                       
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.6s">
+                    <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
+                        <div class="service-icon">
+                            <i class="fa fa-clipboard text-white"></i>
+                        </div>
+                        <h4 class="mb-3">Efficient Lab Assignment</h4>
+                        <p class="m-0">Minimize scheduling conflicts between labs and other classes.</p>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Service End -->
+
+
+
+
+    <!-- Testimonial Start -->
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="section-title text-center position-relative pb-3 mb-4 mx-auto" style="max-width: 600px;">
+                <h5 class="fw-bold text-primary text-uppercase">How to start</h5>
+                <h1 class="mb-0">Navigating AutoPlanify:    <br>A User-Friendly Introduction</h1>
+            </div>
+            <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.6s">
+                <div class="testimonial-item bg-light my-4">
+                    <div class="d-flex align-items-center border-bottom pt-5 pb-4 px-5">
+                         
+                        <div class="ps-4">
+                            <h4 class="text-primary mb-1">Step no:1</h4>
+                            <small class="text-uppercase">Enter Classes</small>
+                        </div>
+                    </div>
+                    <div class="pt-4 pb-5 px-5">
+                        Input class information for accurate scheduling.
+                    </div>
+                </div>
+                <div class="testimonial-item bg-light my-4">
+                    <div class="d-flex align-items-center border-bottom pt-5 pb-4 px-5">
+                         
+                        <div class="ps-4">
+                            <h4 class="text-primary mb-1">Step no:2</h4>
+                            <small class="text-uppercase">Enter Subjects</small>
+                        </div>
+                    </div>
+                    <div class="pt-4 pb-5 px-5">
+                        Provide subject details for precise timetable creation.                    </div>
+                </div>
+                <div class="testimonial-item bg-light my-4">
+                    <div class="d-flex align-items-center border-bottom pt-5 pb-4 px-5">
+                         
+                        <div class="ps-4">
+                            <h4 class="text-primary mb-1">Step no:3</h4>
+                            <small class="text-uppercase">Enter External Teachers(if any)</small>
+                        </div>
+                    </div>
+                    <div class="pt-4 pb-5 px-5">
+                        Include instructors from other departments for comprehensive scheduling.                    </div>
+                </div>
+                <div class="testimonial-item bg-light my-4">
+                    <div class="d-flex align-items-center border-bottom pt-5 pb-4 px-5">
+                         
+                        <div class="ps-4">
+                            <h4 class="text-primary mb-1">Step no:4</h4>
+                            <small class="text-uppercase">Enter  lab details</small>
+                        </div>
+                    </div>
+                    <div class="pt-4 pb-5 px-5">
+                        Specify lab schedules, including teachers, subjects, and weekly class counts.                    </div>
+                </div>
+                <div class="testimonial-item bg-light my-4">
+                    <div class="d-flex align-items-center border-bottom pt-5 pb-4 px-5">
+                         
+                        <div class="ps-4">
+                            <h4 class="text-primary mb-1">Step no:5</h4>
+                            <small class="text-uppercase">Enter Theory classes deatils</small>
+                        </div>
+                    </div>
+                    <div class="pt-4 pb-5 px-5">
+                        Input details for theory classes, including class, subject, weekly class frequency, and assigned teacher.                    </div>
+                </div>
+                <div class="testimonial-item bg-light my-4">
+                    <div class="d-flex align-items-center border-bottom pt-5 pb-4 px-5">
+                         
+                        <div class="ps-4">
+                            <h4 class="text-primary mb-1">Step no:6</h4>
+                            <small class="text-uppercase">Generate timetable</small>
+                        </div>
+                    </div>
+                    <div class="pt-4 pb-5 px-5">
+                        Initiate the timetable generation process based on the entered class, subject, and teacher details, ensuring an efficient and organized schedule for your institution.                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Testimonial End -->
+
+
+    <!-- Team Start -->
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px;">
+                <h5 class="fw-bold text-primary text-uppercase">Users</h5>
+                <h1 class="mb-0">Unlock the Power of AutoPlanify</h1>
+            </div>
+            <div class="row g-5">
+                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
+                    <div class="team-item bg-light rounded overflow-hidden">
+                        
+                        <div class="text-center py-4">
+                            <h4 class="text-primary">Administrators</h4>
+                            <p class="text-uppercase m-0">Manage your entire college's timetable: Departments, HODs, and teachers, all in one secure sign-in</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.6s">
+                    <div class="team-item bg-light rounded overflow-hidden">
+                        
+                        <div class="text-center py-4">
+                            <h4 class="text-primary">HODs</h4>
+                            <p class="text-uppercase m-0">Input course details, share with teachers, finalize conflict-free timetables</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.9s">
+                    <div class="team-item bg-light rounded overflow-hidden">
+                        
+                        <div class="text-center py-4">
+                            <h4 class="text-primary">Teachers</h4>
+                            <p class="text-uppercase m-0">View timetable  & manage your substitutions effectively.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Team End -->
+
+
+    
+
+   
+    
+
+     <!-- Footer Start -->
+     <div class="container-fluid bg-dark text-light mt-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="row gx-5">
+                <div class="col-lg-4 col-md-6 footer-about">
+                    
+                </div>
+                <left>
+                <div class="col-lg-8 col-md-6">
+                    <div class="row gx-5">
+                        
+                        
+                        <div class="col-lg-4 col-md-12 pt-0 pt-lg-5 mb-5">
+                            <div class="section-title section-title-sm position-relative pb-3 mb-4">
+                               
+                               <br> <h3 class="text-light mb-0">AutoPlanify</h3>
+                            </div>
+                            <div class="link-animated d-flex flex-column justify-content-start">
+                                <p>Stop scheduling struggles, start scheduling smart. Choose AutoPlanify.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</left>
+    <div class="container-fluid text-white" style="background: #061429;">
+        <div class="container text-center">
+            <div ><center>
+                <div class="col-lg-8 col-md-6">
+                    <div class="d-flex align-items-center justify-content-center" style="height: 75px;">
+                        <p class="mb-0">&copy; <a class="text-white border-bottom" href="#"> 2024 AutoPlanify</a>.<br> A collaborative effort by Akshitha V, Nandana K, and Arya MM.</p>
+						
+						<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+						
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='lib/wow/wow.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/easing/easing.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/waypoints/waypoints.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/counterup/counterup.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/owlcarousel/owl.carousel.min.js') }}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    
+    
+
+
+
+
+
+
+
+  </body>
+  </html>

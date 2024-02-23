@@ -1,0 +1,127 @@
+
+  {% extends 'hod_base.html' %}
+  {% block title %}Home{% endblock title %}
+    {% block body %}
+   
+  
+  
+    <main id="main" class="main">
+  
+      <div class="pagetitle">
+        <h1>Enter Details</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/hod_home">Home</a></li>
+            
+            <li class="breadcrumb-item active">Subjects</li>
+          </ol>
+        </nav>
+      </div><!-- End Page Title -->
+      <section class="section">
+        <div class="row">
+          <div class="col-lg-6">
+  
+            <div class="card">
+              <div class="card-body">
+                <form action="/add_sub" method='POST'>
+                <h5 class="card-title">Subjects</h5>
+  
+                <!-- Horizontal Form -->
+                <form>
+                  <div class="row mb-3">
+                    
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp" required/>
+                    </div>
+                  </div>
+                 
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                   
+  
+                    {% for mesg  in get_flashed_messages()%}
+                    <h5 style="color: red; font-family:monospace; font-style: oblique;">{{mesg}}</h5>
+                  {% endfor %}
+  
+                  </form>
+                  </div>
+                </form><!-- End Horizontal Form -->
+  
+              </div>
+            </div>
+  
+  
+                 
+  
+                  
+        
+            {% if allsub |length == 0 %} 
+            <div class="alert alert-dark" role="alert">  
+             No Subjects FOUND.
+            </div>
+           {% else %}
+         <table class="table">
+         <thead>
+           <tr>
+             <th scope="col">sno</th>           
+             <th scope="col">title</th>
+             <th scope="col">actions</th>
+           </tr>
+         </thead>
+         <tbody>
+           {% endif %}
+     {% for subjects in allsub %}
+       <tr>
+         <th scope="row">{{loop.index}}</th>
+       
+         <td>{{subjects.sname}}</td>
+    
+         <td>
+             <a href="/delete_sub/{{subjects.sid}}" <button type="button" class="btn btn-outline-secondary btn-sm mx 3">Delete</button></td>
+
+       </tr>
+
+
+
+       
+       {% endfor %}
+      
+     </tbody>
+   </table>
+
+
+   
+  
+  
+                  
+  
+                </div><!-- End Bordered Tabs -->
+  
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </section>
+  
+    </main><!-- End #main -->
+  
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Autoplanify</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+       
+      </div>
+    </footer><!-- End Footer -->
+  
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    
+  
+   
+    {% endblock body %}

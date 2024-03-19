@@ -27,7 +27,7 @@ This project is built using the following technologies:
 ## Deployment
 
 The application is deployed and accessible online, allowing users to access it from anywhere with an internet connection.
-
+-https://autoplanify.pythonanywhere.com/
 ## How to Use
 
 1. **Accessing the Application:** Users can access the application through the provided URL.
